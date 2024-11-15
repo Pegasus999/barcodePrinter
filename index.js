@@ -13,7 +13,7 @@ function wrapText(ctx, text, maxWidth) {
     const word = words[i];
     const width = ctx.measureText(currentLine + " " + word).width;
 
-    if (width < maxWidth) {
+    if (width < maxWidth || lines.length == 1) {
       currentLine += " " + word;
     } else {
       lines.push(currentLine);
@@ -46,7 +46,7 @@ async function generateBarcodeCanvas(text, barcodeData) {
 
   // Draw the text line by line
   lines.forEach((line, index) => {
-    ctx.fillText(line, centerX, startY + index * lineHeight);
+    ctx.fillText(line, centerX, startY + index * lineHeight, canvas.width);
   });
 
   // Generate the barcode
@@ -136,7 +136,7 @@ async function createBarcodePDF(dataArray, outputPath) {
 // Example usage
 const dataArray = [
   {
-    text: "Armani Stronger With You Intensely",
+    text: "Armani Stronger With You Intensely very good smell am just testing shit ",
     barcodeData: "01234",
   },
 ];
